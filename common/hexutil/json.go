@@ -112,6 +112,9 @@ func UnmarshalFixedText(typname string, input, out []byte) error {
 	if err != nil {
 		return err
 	}
+	if len(raw) == 0 { //allowed empty input
+		return nil
+	}
 	if len(raw)/2 != len(out) {
 		return fmt.Errorf("hex string has length %d, want %d for %s", len(raw), len(out)*2, typname)
 	}

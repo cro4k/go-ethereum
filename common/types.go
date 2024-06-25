@@ -50,6 +50,8 @@ var (
 
 	// MaxHash represents the maximum possible hash value.
 	MaxHash = HexToHash("0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")
+
+	ZeroHash = HexToHash("0x0")
 )
 
 // Hash represents the 32 byte Keccak256 hash of arbitrary data.
@@ -150,6 +152,10 @@ func (h *Hash) SetBytes(b []byte) {
 	}
 
 	copy(h[HashLength-len(b):], b)
+}
+
+func (h *Hash) IsZero() bool {
+	return *h == ZeroHash
 }
 
 // Generate implements testing/quick.Generator.

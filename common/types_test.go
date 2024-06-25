@@ -622,3 +622,19 @@ func TestDecimalUnmarshalJSON(t *testing.T) {
 		}
 	}
 }
+
+func TestHashIsZero(t *testing.T) {
+	expected := map[Hash]bool{
+		HexToHash(""):     true,
+		HexToHash("0x"):   true,
+		HexToHash("0x0"):  true,
+		HexToHash("0x00"): true,
+		HexToHash("0x1"):  false,
+		HexToHash("0x01"): false,
+	}
+	for h, exp := range expected {
+		if h.IsZero() != exp {
+			t.Fail()
+		}
+	}
+}
